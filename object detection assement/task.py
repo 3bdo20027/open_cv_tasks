@@ -5,15 +5,15 @@ import matplotlib.pyplot as plt
 
 #read images
 
-car1=cv2.imread('data/Rapid-red-front-rus.jpg')
+car1=cv2.imread('object detection assement/data/Rapid-red-front-rus.jpg')
 car1=cv2.cvtColor(car1,cv2.COLOR_BGR2RGB)
 
 
 
-car2=cv2.imread('data/bbb.png')
+car2=cv2.imread('object detection assement/data/bbb.png')
 car2=cv2.cvtColor(car2,cv2.COLOR_BGR2RGB)
 
-car3=cv2.imread('data/rus.jpg')
+car3=cv2.imread('object detection assement/data/rus.jpg')
 car3=cv2.cvtColor(car3,cv2.COLOR_BGR2RGB)
 
 
@@ -34,7 +34,7 @@ dispaly_image(car1,'car')
 
 #load traind_pre file xml
 
-casceds=cv2.CascadeClassifier('data/haarcascade_russian_plate_number.xml')
+casceds=cv2.CascadeClassifier('object detection assement/data/haarcascade_russian_plate_number.xml')
 
 #create detect function and draw rectangle and blur car plate
 

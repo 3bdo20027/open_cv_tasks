@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 #cat=cv2.imread('data/cat.jpg')
 
-cat = cv2.imread('data1/cat.jpg')
+cat = cv2.imread('Image process/data1/cat.jpg')
 print(type(cat))
 
 #convet from BGR to RGB
