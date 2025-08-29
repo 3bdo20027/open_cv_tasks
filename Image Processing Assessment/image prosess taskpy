@@ -1,0 +1,89 @@
+import cv2
+import numpy as np 
+import matplotlib.pyplot as plt
+
+
+
+#read image 
+
+#cat=cv2.imread('data/cat.jpg')
+
+cat = cv2.imread('cat.jpg')
+print(type(cat))
+
+#convet from BGR to RGB
+cat_rgb=cv2.cvtColor(cat,cv2.COLOR_BGR2RGB)
+
+#display image function
+def dispaly_image(img,title,cmap=None):
+
+    fig=plt.figure(figsize=(12,10))
+
+    ax=fig.add_subplot(111)
+
+    ax.imshow(img,cmap=cmap)
+    plt.title(title)
+    plt.show()
+
+
+dispaly_image(cat_rgb,'original image')
+
+
+#2: convert to gary scale to apply binary thrshold
+
+gray_cat=cv2.cvtColor(cat,cv2.COLOR_BGR2GRAY)
+
+dispaly_image(gray_cat,'gray image','gray')
+
+#theshold 
+
+ret,cat_threshold=cv2.threshold(gray_cat,.66*gray_cat.max(),255,type=cv2.THRESH_BINARY)
+
+dispaly_image(cat_threshold,'threshold cat image','gray')
+
+#convert to HSV
+
+cat_HSV=cv2.cvtColor(cat,cv2.COLOR_BGR2HSV)
+
+dispaly_image(cat_HSV,'HSV colors')
+
+
+#blur image 
+
+kernal=np.ones(shape=(4,4),dtype=np.float32)/10
+
+#image is big required big kernal to show effect
+
+kernal2=np.ones(shape=(30,30),dtype=np.float32)/(30*30)
+
+
+print(kernal)
+
+blur_image=cv2.filter2D(cat_rgb,-1,kernal2)
+
+dispaly_image(blur_image,'the cat blur image')
+
+
+#craete sobelx
+
+sobelx=cv2.Sobel(src=gray_cat,ddepth=-1,dx=1,dy=0,ksize=5)
+
+dispaly_image(sobelx,'sobel x image','gray')
+
+#histogram
+
+colors=('r','b','g')
+
+for i,col in enumerate(colors):
+
+    cat_hist_values=cv2.calcHist(images=[cat_rgb],channels=[i],mask=None,histSize=[256],ranges=[0,256])
+
+    #plot histogran valuee
+    plt.plot(cat_hist_values,color=col)
+    plt.xlim([0,256])
+
+
+plt.title('3 chaneal histograms')
+plt.show()
+
+
